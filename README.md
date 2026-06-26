@@ -129,3 +129,55 @@ Husky is installed by default and configured to run following tasks:
 ## 💙 Feedback
 
 This repo was created based on [@dev-templates-public](https://github.com/notum-cz/dev-templates-public). If you encounter a problem with the template code during development, or something has changed/is being done differently in the meantime, or you have implemented a useful feature that should be part of that template, please create an issue with a description or PR in that repository. So we can keep those templates updated and great features. Thanks.
+
+---
+
+## ResAvenue 2026 – Setup
+
+> **Note:** This monorepo uses **pnpm 9** (`pnpm-workspace.yaml`). Use `pnpm`, not yarn/npm. Some legacy template sections above still mention `yarn` — the equivalent `pnpm` commands are below.
+
+This repo hosts a Table Tennis Tournament site for **Lodha HPM – ResAvenue 2026**:
+
+- **`apps/strapi`** (`@repo/strapi`) — Strapi v5 backend. Content types: `category`, `player`, `group`, `match`, `tournament`. SQLite in development, PostgreSQL in production.
+- **`apps/web`** (`@repo/ui`) — Next.js (App Router) frontend with Tailwind CSS. Public pages plus a password-protected `/admin` area.
+
+```bash
+# Install
+pnpm install
+
+# Dev (both apps)
+pnpm dev
+
+# Dev (individual)
+pnpm dev:strapi   # Strapi on http://localhost:1337
+pnpm dev:ui       # Next.js on http://localhost:3000
+
+# Strapi admin panel (first run creates the super admin)
+# http://localhost:1337/admin
+
+# Web app
+# http://localhost:3000
+```
+
+### Environment variables
+
+```bash
+cp apps/strapi/.env.example apps/strapi/.env
+cp apps/web/.env.example apps/web/.env.local
+```
+
+- **`apps/strapi/.env`** — `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET` (dev defaults are pre-filled). Leave `DATABASE_URL` empty for SQLite in dev; set it to a PostgreSQL connection string in production.
+- **`apps/web/.env.local`** — `NEXT_PUBLIC_STRAPI_URL`, `STRAPI_API_TOKEN` (a **Full access** token from Strapi → Settings → API Tokens), and `ADMIN_SECRET` (the password for the `/admin` area).
+
+### First-run checklist
+
+1. `pnpm dev:strapi`, open `http://localhost:1337/admin`, create the super admin. Public read permissions and authenticated CRUD for the tournament content types are granted automatically on boot.
+2. Create a **Full access** API token (Settings → API Tokens) and put it in `apps/web/.env.local` as `STRAPI_API_TOKEN`.
+3. Add at least one `tournament` and some `category` entries.
+4. `pnpm dev:ui`, open `http://localhost:3000`. Manage the event at `http://localhost:3000/admin` (log in with `ADMIN_SECRET`).
+
+### Tests
+
+```bash
+pnpm --filter @repo/ui test    # unit tests for the pure tournament logic
+```

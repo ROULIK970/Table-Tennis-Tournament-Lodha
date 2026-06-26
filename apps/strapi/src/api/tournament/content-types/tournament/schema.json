@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tournaments",
+  "info": {
+    "singularName": "tournament",
+    "pluralName": "tournaments",
+    "displayName": "Tournament",
+    "description": "The tournament event metadata (title, dates, status)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "ceremonyDate": {
+      "type": "date"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["upcoming", "ongoing", "completed"],
+      "required": true,
+      "default": "upcoming"
+    }
+  }
+}

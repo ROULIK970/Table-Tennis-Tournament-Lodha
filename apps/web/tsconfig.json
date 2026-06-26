@@ -1,0 +1,24 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    // Pin ambient global types to this app's own packages. Without this,
+    // TypeScript auto-includes pnpm's hoisted `.pnpm/node_modules/@types/react`
+    // (React 18, from the Strapi app) alongside this app's React 19 types,
+    // producing two conflicting global `React` namespaces.
+    "types": ["node", "react", "react-dom"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.mjs",
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "prettier.config.js"
+  ],
+  "exclude": ["node_modules"]
+}

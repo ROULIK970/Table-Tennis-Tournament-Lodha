@@ -1,15 +1,11 @@
-import { StrapiApp } from "@strapi/strapi/admin"
-
-import { cs } from "./cs"
+import type { StrapiApp } from "@strapi/strapi/admin"
 
 export default {
   config: {
-    locales: ["en", "cs"],
-    translations: {
-      cs,
-    },
+    locales: ["en"],
   },
   bootstrap(app: StrapiApp) {
+    // eslint-disable-next-line no-console
     console.log(app)
   },
 }

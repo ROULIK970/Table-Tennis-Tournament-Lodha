@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "groups",
+  "info": {
+    "singularName": "group",
+    "pluralName": "groups",
+    "displayName": "Group",
+    "description": "A round-robin group within a category"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "groups"
+    },
+    "players": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::player.player",
+      "inversedBy": "groups"
+    }
+  }
+}

@@ -28,7 +28,6 @@
     "dev:ui": "turbo run dev --filter=@repo/ui",
     "format": "prettier --write --cache --ignore-unknown \"**/*.{js,jsx,ts,tsx,md,css,scss}\"",
     "heroku-postbuild": "bash ./scripts/heroku/heroku-postbuild.sh",
-    "preinstall": "npx only-allow yarn",
     "lint": "turbo lint",
     "prepare": "husky",
     "start:strapi": "turbo run start --filter=@repo/strapi",
@@ -49,7 +48,13 @@
     "prettier": "3.3.2",
     "turbo": "^2.0.9"
   },
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "pnpm@9.15.9",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.2.17",
+      "@types/react-dom": "19.2.3"
+    }
+  },
   "engines": {
     "node": "22.x.x",
     "yarn": "1.22.x"

@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "matches",
+  "info": {
+    "singularName": "match",
+    "pluralName": "matches",
+    "displayName": "Match",
+    "description": "A single match between two players in a given phase"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "phase": {
+      "type": "enumeration",
+      "enum": ["group", "quarterfinal", "semifinal", "final"],
+      "required": true,
+      "default": "group"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "matches"
+    },
+    "player1": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::player.player"
+    },
+    "player2": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::player.player"
+    },
+    "winner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::player.player"
+    },
+    "score1": {
+      "type": "integer",
+      "min": 0
+    },
+    "score2": {
+      "type": "integer",
+      "min": 0
+    },
+    "scheduledAt": {
+      "type": "datetime"
+    },
+    "completedAt": {
+      "type": "datetime"
+    }
+  }
+}

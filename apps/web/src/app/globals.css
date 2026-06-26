@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/*
+  ResAvenue 2026 design system.
+  Functional, high information density, German-public-sector clarity:
+  flat surfaces, structural borders, no shadows, minimal rounding.
+*/
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-accent: #1a56db;
+  --color-accent-hover: #1648b8;
+  --color-accent-foreground: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-muted: #6b7280;
+  --color-success: #16803c;
+  --color-danger: #b91c1c;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+
+  --radius: 2px;
+}
+
+/*
+  Tailwind v4 defaults the border color to `currentColor`; pin it to our
+  structural border token so bordered layouts read consistently.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
